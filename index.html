@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color: #000;">
+    <div id="game" style="width: 400px; height: 380px; font: 12px Courier; color: #f1f1f1;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const rnd = () => Math.round(Math.random() * 20), rows = 30, cls = 50;
+        let by = 10, ps = [[cls, rnd()], [cls + 30, rnd()]], sc = 0, p = [...ps[0]];
+        const tick = setInterval(() => {
+            if ((p[0] <= 12 && p[0] >= 1 && (by <= p[1] || by >= p[1] + 9)) || by <= -1 || by >= 29) clearInterval(tick), alert(`Game over! Your score: ${sc}`), location.reload();
+            $('#game').html(Array(rows).fill().map((_, i) => Array(cls).fill().map((_, j) => ((j >= ps[0][0] && j <= ps[0][0] + 10) && (i <= ps[0][1] || i >= ps[0][1] + 10)) || ((j >= ps[1][0] && j <= ps[1][0] + 10) && (i <= ps[1][1] || i >= ps[1][1] + 10)) ? 'u' : (j >= 11 && j <= 12 && i >= by && i <= by + 1) ? 'x' : '.').join('')).join('\n'));
+            if (--ps[0][0] < -10) p = [...ps[1]], ps[0] = [cls, rnd()], sc++;
+            if (--ps[1][0] < -10) p = [...ps[0]], ps[1] = [cls, rnd()], sc++;
+            p[0]--; by++;
+        }, 100);
+        $(document).on('keyup', () => by -= 4);
+    </script>
+</body>
+</html>
