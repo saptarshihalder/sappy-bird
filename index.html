@@ -4,6 +4,7 @@
     <div id="game" style="width: 400px; height: 380px; font: 12px Courier; color: #f1f1f1;"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+ // Genenrating a vertical bars here
         const rnd = () => Math.round(Math.random() * 20), rows = 30, cls = 50;
         let by = 10, ps = [[cls, rnd()], [cls + 30, rnd()]], sc = 0, p = [...ps[0]];
         const tick = setInterval(() => {
